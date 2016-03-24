@@ -4,27 +4,27 @@ import java.util.Random;
 
 public class DataPoint {
 
-	private double X;
-	private double Y;
+	private double[] Data;
+
 	
-	public DataPoint(double devX, double devY)
+	public DataPoint(double[] dev,double[] var, int dim)
 	{
-		Init(devX, devY);
+		Data = new double[dim];
+		Init(dev,var, dim);
 	}
-	private void Init(double devationX, double devationY)
+	private void Init(double[] dev, double[] variation,  int Dim)
 	{
 		Random r = new Random();
-		X = devationX + (r.nextGaussian());
-		Y = devationY + (r.nextGaussian());
-		//System.out.println(X);
-		//System.out.println(Y);
+		
+		for(int i = 0; i < Dim; i++)
+		{
+			Data[i] = (dev[i] +(r.nextGaussian())) * variation[i];
+			System.out.println(Data[i]);
+		}
+
 	}
 	
-	public double getY() {
-		return Y;
-	}
-
-	public double getX() {
-		return X;
+	public double[] getData() {
+		return Data;
 	}
 }

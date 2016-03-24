@@ -24,13 +24,13 @@ public class DataGenerator {
 	private List<DataPoint> DataPoints = new ArrayList<DataPoint>();
 	private List<Cluster> AllCluster = new ArrayList<Cluster>();
 	
-	public void Init(int numCluster, int numDataPoints, int xmax)
+	public void Init(int numCluster, int numDataPoints, int xmax, int Dim)
 	{
 		Num_DataPoints = numDataPoints;
 		Num_Cluster = numCluster;
 		x_max = xmax;
 		CreateClusters();
-		CreateData();
+		CreateData(Dim);
 		FillDataPoints();
 	}
 	
@@ -65,28 +65,43 @@ public class DataGenerator {
 		}
 	}
 	
-	private void CreateData()
+	private void CreateData(int dim)
 	{
 		int count = 0;
+		boolean chaos = false;
 		Random RandomGenerator = new Random();
 		for(int i = 0; i < Num_Cluster; i++)
 		{
 			//Meanvalues
-			int randomX = RandomGenerator.nextInt(x_max);
-			int randomY = RandomGenerator.nextInt(x_max);
 			
-			if(randomX < 10){i=i-1;continue;}
+			double[] random = new double[dim];
+			double[] variation = new double[dim];
+			for(int k = 0; k < dim; k++)
+			{
+				random[k] = RandomGenerator.nextInt(x_max);
+				variation[k] = RandomGenerator.nextInt(4) + 1;
+			}
+			for(int l = 0; l < dim; l++)
+			{
+				if(random[l] < 25){chaos = true; break;}
+				
+			}
+			if(chaos == true)
+			{
+				chaos = false;
+				i=i-1;
+				continue;
+			}
 			
-			if(randomY < 10){i=i-1;continue;}
 			
 			for(int j = 0; j < AllCluster.get(i).getNum_DataPoints(); j++)
 			{
-				AllCluster.get(i).add_Point(new DataPoint((double)randomX, (double)randomY));
+				AllCluster.get(i).add_Point(new DataPoint(random,variation, dim));
 				count++;
 
 			}
 		}
-		//System.out.println(count);
+		System.out.println(count);
 	}
 
 	private void FillDataPoints() {
