@@ -36,8 +36,13 @@ public class MainClass {
 		}
 		System.out.println(count);
 		*/
+		int numCluster = 10;
+		int numDataPoints = 1009;
+		int xmax = 100;
+		DataGenerator.getInstance().Init(numCluster, numDataPoints, xmax);
 		
-		//DataGenerator.getInstance().Init(numCluster, numDataPoints, xmax);
+		int temp = DataGenerator.getInstance().getDataPoints().size();
+		System.out.print(temp);
 	}
 	
 }

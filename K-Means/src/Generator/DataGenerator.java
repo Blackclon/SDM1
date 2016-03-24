@@ -31,6 +31,7 @@ public class DataGenerator {
 		x_max = xmax;
 		CreateClusters();
 		CreateData();
+		FillDataPoints();
 	}
 	
 	private void CreateClusters()
@@ -68,14 +69,13 @@ public class DataGenerator {
 		Random RandomGenerator = new Random();
 		for(int i = 0; i < Num_Cluster; i++)
 		{
+			//Meanvalues
 			int randomX = RandomGenerator.nextInt(x_max);
 			int randomY = RandomGenerator.nextInt(x_max);
 			
-			if(randomX < 10){randomX += 10;}
-			if(randomX > (x_max-10)){randomX -= 10;}
+			if(randomX < 10){i=i-1;continue;}
 			
-			if(randomY < 10){randomY += 10;}
-			if(randomY > (x_max-10)){randomY -= 10;}
+			if(randomY < 10){i=i-1;continue;}
 			
 			for(int j = 0; j < AllClutser.get(i).getNum_DataPoints(); j++)
 			{
@@ -84,9 +84,15 @@ public class DataGenerator {
 		}
 	}
 	
-	
-	
-	
+	private void FillDataPoints() {
+		for(int i = 0;i<AllClutser.size();i++)
+		{
+			for(int j=0; j<AllClutser.get(i).getNum_DataPoints();j++)
+			{
+				DataPoints.add(AllClutser.get(i).DataInCluster().get(j));
+			}
+		}
+	}
 	
 	
 	public List<DataPoint> getDataPoints() {
