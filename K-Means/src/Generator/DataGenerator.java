@@ -86,19 +86,18 @@ public class DataGenerator {
 
 			}
 		}
-		System.out.println(count);
+		//System.out.println(count);
 	}
 
 	private void FillDataPoints() {
-		for(int i = 0;i<AllClutser.size();i++)
+		for(int i = 0;i<AllCluster.size();i++)
 		{
-			for(int j=0; j<AllClutser.get(i).getNum_DataPoints();j++)
+			for(int j=0; j<AllCluster.get(i).getNum_DataPoints();j++)
 			{
-				DataPoints.add(AllClutser.get(i).DataInCluster().get(j));
+				DataPoints.add(AllCluster.get(i).DataInCluster().get(j));
 
 			}
 		}
-		System.out.println(count);
 	}
 	
 	public List<DataPoint> getDataPoints() {
