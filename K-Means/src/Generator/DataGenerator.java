@@ -70,6 +70,7 @@ public class DataGenerator {
 		int count = 0;
 		boolean chaos = false;
 		Random RandomGenerator = new Random();
+		double factor = x_max/(Num_Cluster *2);
 		for(int i = 0; i < Num_Cluster; i++)
 		{
 			//Meanvalues
@@ -79,11 +80,12 @@ public class DataGenerator {
 			for(int k = 0; k < dim; k++)
 			{
 				random[k] = RandomGenerator.nextInt(x_max);
-				variation[k] = RandomGenerator.nextInt(4) + 1;
+				variation[k] = RandomGenerator.nextInt((int)factor);
 			}
 			for(int l = 0; l < dim; l++)
 			{
-				if(random[l] < 25){chaos = true; break;}
+				if(random[l] < 3 * factor){chaos = true; break;}
+				if(random[l] > x_max - (3 * factor)){chaos = true; break;}
 				
 			}
 			if(chaos == true)

@@ -53,7 +53,7 @@ public class MainClass {
 		for(int i = 0; i< DataGenerator.getInstance().getNum_DataPoints();i++)
 		{
 			double[] tempdouble = test.get(i).getData();
-			for(int j = 0; j<3;j++)
+			for(int j = 0; j<2;j++)
 			{
 				double tempdoubleb = tempdouble[j];
 				writer.write(Double.toString(tempdoubleb)+", ");
