@@ -1,9 +1,8 @@
 package Main;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import Generator.*;
 
@@ -36,7 +35,7 @@ public class MainClass {
 	    int Xmax = Integer.parseInt(eingabe3);
 	    int dim = Integer.parseInt(eingabe4);
 	    
-	    if(numCluster > numData/2  || Xmax < numData/2)
+	    if(numCluster > numData/2 || Xmax < 100)
 	    {
 	    	System.out.print("Wrong input data, please restart programm!");
 	    	System.exit(0);
@@ -44,6 +43,23 @@ public class MainClass {
 	    
 		DataGenerator.getInstance().Init(numCluster, numData, Xmax, dim);
 		
+		List<DataPoint> test = DataGenerator.getInstance().getDataPoints();
+        File logFile = new File("test.txt");
+        // This will output the full path where the file will be written to...
+        System.out.println(logFile.getCanonicalPath());
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(logFile));
+
+		for(int i = 0; i< DataGenerator.getInstance().getNum_DataPoints();i++)
+		{
+			double[] tempdouble = test.get(i).getData();
+			for(int j = 0; j<3;j++)
+			{
+				double tempdoubleb = tempdouble[j];
+				writer.write(Double.toString(tempdoubleb)+", ");
+			}
+			writer.write("\n");
+		}
 	}
 	
 }

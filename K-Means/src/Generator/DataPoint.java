@@ -18,8 +18,8 @@ public class DataPoint {
 		
 		for(int i = 0; i < Dim; i++)
 		{
-			Data[i] = (dev[i] +(r.nextGaussian())) * variation[i];
-			System.out.println(Data[i]);
+			Data[i] = dev[i] +(r.nextGaussian() * variation[i]);
+			//System.out.println(Data[i]);
 		}
 
 	}
