@@ -16,6 +16,9 @@ public class Cluster {
 	public int getNum_DataPoints() {
 		return Num_DataPoints;
 	}
+	public void setNum_DataPoints(int toSet) {
+		Num_DataPoints = toSet;
+	}
 	public List<DataPoint> DataInCluster() {
 		return DataInCluster;
 	}

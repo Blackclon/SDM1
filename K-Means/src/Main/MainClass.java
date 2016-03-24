@@ -12,7 +12,7 @@ public class MainClass {
 
 	public static void main(String[] args) throws IOException
 	{
-<<<<<<< HEAD
+
 		InputStreamReader isr = new InputStreamReader(System.in);
 	    BufferedReader br = new BufferedReader(isr);
 	    System.out.print("Number of Cluster: ");

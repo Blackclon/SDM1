@@ -22,7 +22,7 @@ public class DataGenerator {
 	private int Num_Cluster;
 	private int x_max;
 	private List<DataPoint> DataPoints = new ArrayList<DataPoint>();
-	private List<Cluster> AllClutser = new ArrayList<Cluster>();
+	private List<Cluster> AllCluster = new ArrayList<Cluster>();
 	
 	public void Init(int numCluster, int numDataPoints, int xmax)
 	{
@@ -46,26 +46,28 @@ public class DataGenerator {
 		for(int i = 0;i<Num_Cluster/2;i++)
 		{
 			int random = RandomGenerator.nextInt(max_diff);
-			AllClutser.add(new Cluster(average_Num_Points-random));
-			AllClutser.add(new Cluster(average_Num_Points+random));
+			AllCluster.add(new Cluster(average_Num_Points-random));
+			AllCluster.add(new Cluster(average_Num_Points+random));
 			count = count + (average_Num_Points-random) + (average_Num_Points+random);
 		}
 		if((Num_Cluster%2)==1)		//if Num_Clusters is odd
 		{
 			count += average_Num_Points;
-			if(count != Num_DataPoints)
+			AllCluster.add(new Cluster(average_Num_Points));
+		}
+		if(count != Num_DataPoints)
+		{
+			int temp = AllCluster.get(0).getNum_DataPoints();
+			for(int h = 0; h < Num_DataPoints - count; h++ )
 			{
-				AllClutser.add(new Cluster(average_Num_Points + (Num_DataPoints-count)));
-			}
-			else
-			{
-				AllClutser.add(new Cluster(average_Num_Points));
+				AllCluster.get(0).setNum_DataPoints(++temp);
 			}
 		}
 	}
 	
 	private void CreateData()
 	{
+		int count = 0;
 		Random RandomGenerator = new Random();
 		for(int i = 0; i < Num_Cluster; i++)
 		{
@@ -77,11 +79,14 @@ public class DataGenerator {
 			
 			if(randomY < 10){i=i-1;continue;}
 			
-			for(int j = 0; j < AllClutser.get(i).getNum_DataPoints(); j++)
+			for(int j = 0; j < AllCluster.get(i).getNum_DataPoints(); j++)
 			{
-				AllClutser.get(i).add_Point(new DataPoint((double)randomX, (double)randomY));
+				AllCluster.get(i).add_Point(new DataPoint((double)randomX, (double)randomY));
+				count++;
+
 			}
 		}
+		System.out.println(count);
 	}
 
 	private void FillDataPoints() {
@@ -90,8 +95,10 @@ public class DataGenerator {
 			for(int j=0; j<AllClutser.get(i).getNum_DataPoints();j++)
 			{
 				DataPoints.add(AllClutser.get(i).DataInCluster().get(j));
+
 			}
 		}
+		System.out.println(count);
 	}
 	
 	public List<DataPoint> getDataPoints() {
@@ -103,7 +110,7 @@ public class DataGenerator {
 	public int getNum_DataPoints() {
 		return Num_DataPoints;
 	}
-	public List<Cluster> getAllClutser() {
-		return AllClutser;
+	public List<Cluster> getAllCluster() {
+		return AllCluster;
 	}
 }

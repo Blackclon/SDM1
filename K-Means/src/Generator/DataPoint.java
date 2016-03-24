@@ -16,8 +16,8 @@ public class DataPoint {
 		Random r = new Random();
 		X = devationX + (r.nextGaussian());
 		Y = devationY + (r.nextGaussian());
-		//System.out.println(X);
-		//System.out.println(Y);
+		System.out.println(X);
+		System.out.println(Y);
 	}
 	
 	public double getY() {
