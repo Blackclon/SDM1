@@ -54,7 +54,7 @@ public class DataGenerator {
 			count += average_Num_Points;
 			if(count != Num_DataPoints)
 			{
-				AllClutser.add(new Cluster(average_Num_Points - (Num_DataPoints-count)));
+				AllClutser.add(new Cluster(average_Num_Points + (Num_DataPoints-count)));
 			}
 			else
 			{
@@ -83,10 +83,6 @@ public class DataGenerator {
 			}
 		}
 	}
-	
-	
-	
-	
 	
 	
 	public List<DataPoint> getDataPoints() {
