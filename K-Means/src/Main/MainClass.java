@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import Generator.*;
+import Algorithm.*;
 //import Graphics.*;
 
 import org.math.plot.*;
@@ -34,30 +35,23 @@ public class MainClass {
 	    
 	    
 	    System.out.print("Enter Data Dimension: ");
-	    String eingabe4 = br.readLine();
-	    
-	    System.out.print("Enter Dimension to plot as X-Coordinate: ");
-	    String eingabe5 = br.readLine();
-	    System.out.print("Enter Dimension to plot as Y-Coordinate: ");
-	    String eingabe6 = br.readLine();
-	    
+	    String eingabe4 = br.readLine(); 
 	    
 	    int numCluster = Integer.parseInt(eingabe);
 	    int numData = Integer.parseInt(eingabe2);
 	    int Xmax = Integer.parseInt(eingabe3);
 	    int dim = Integer.parseInt(eingabe4);
-	    int x = Integer.parseInt(eingabe5);
-	    int y = Integer.parseInt(eingabe6);
 	    
 	    // could be extended(input thats not a number should be also lead to wrong input data.). 
-	    if(numCluster > numData/2 || Xmax < 100 || x == y)
+	    if(numCluster > numData/2 || Xmax < 100)
 	    {
 	    	System.out.print("Wrong input data, please restart programm!");
 	    	System.exit(0);
 	    }
 	    
 		DataGenerator.getInstance().Init(numCluster, numData, Xmax, dim);
-		Graphics G = new Graphics(DataGenerator.getInstance().getAllCluster(), x, y);
+
+		Calculus Calc = new Calculus(DataGenerator.getInstance().getDataPoints(),numCluster);
 		
 		//not necessary!! but cool :D
 		while(true)
@@ -68,7 +62,8 @@ public class MainClass {
 		    String eingabe8 = br.readLine();
 		    int A = Integer.parseInt(eingabe7);
 		    int B = Integer.parseInt(eingabe8);
-		    Graphics Z = new Graphics(DataGenerator.getInstance().getAllCluster(), A, B);
+		    
+		    Graphics Z = new Graphics(Calc.getAllCluster(), A, B);
 		}
 		/*
 		List<DataPoint> test = DataGenerator.getInstance().getDataPoints();

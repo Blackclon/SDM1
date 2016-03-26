@@ -13,7 +13,7 @@ public class Calculus {
 	private List<Cluster> AllCluster = new ArrayList<Cluster>();
 	private List<DataPoint> Points = new ArrayList<DataPoint>();
 
-	Calculus(List<DataPoint> _Points, int _Num_Cluster)
+	public Calculus(List<DataPoint> _Points, int _Num_Cluster)
 	{
 		Points = _Points;
 		Dimension = _Points.get(0).getData().length;
@@ -30,7 +30,7 @@ public class Calculus {
 		int index = 0;
 		for(int i=0;i<Points.size();i++)
 		{
-			index = RandomGenerator.nextInt(Num_Cluster)+1;
+			index = RandomGenerator.nextInt(Num_Cluster);
 			AllCluster.get(index).add_Point(Points.get(i));
 		}
 		Cluster tempCluster = new Cluster(0);
@@ -66,4 +66,9 @@ public class Calculus {
 		}
 	}
 	
+	public List<Cluster> getAllCluster()
+	{
+		Initial1();
+		return AllCluster;
+	}
 }
