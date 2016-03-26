@@ -24,7 +24,9 @@ public class Graphics {
 		// create your PlotPanel (you can use it as a JPanel)
 		Plot2DPanel plot = new Plot2DPanel();
 		
-		Color color[] = {Color.BLACK, Color.BLUE, Color.CYAN, Color.DARK_GRAY, Color.GRAY, Color.GREEN, Color.LIGHT_GRAY, Color.MAGENTA, Color.ORANGE, Color.PINK,Color.RED, Color.WHITE};
+		Color color[] = {Color.BLUE, Color.CYAN, Color.DARK_GRAY, 
+				Color.GRAY, Color.BLACK, Color.LIGHT_GRAY, Color.MAGENTA, 
+				Color.ORANGE, Color.PINK,Color.RED, Color.WHITE};
 		
 		// add a line plot to the PlotPanel
 		for(int j = 0; j < DataGenerator.getInstance().getNum_Cluster(); j++)
@@ -34,7 +36,12 @@ public class Graphics {
 				x[i] = Input.get(j).DataInCluster().get(i).getData()[X-1];
 				y[i] = Input.get(j).DataInCluster().get(i).getData()[Y-1];
 			}
-			plot.addScatterPlot("jo",color [j%13], x, y);
+			double[] tempX = new double[1];
+			double[] tempY = new double[1];
+			tempX[0] = Input.get(j).get_Centroid().getData()[X-1];
+			tempY[0] = Input.get(j).get_Centroid().getData()[Y-1];
+			plot.addScatterPlot("jo",color [j%11], x, y);
+			plot.addScatterPlot("jo", Color.GREEN,tempX, tempY );
 		}
 		
 		// put the PlotPanel in a JFrame, as a JPanel
