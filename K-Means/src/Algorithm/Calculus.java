@@ -97,6 +97,10 @@ public class Calculus {
 			}
 			AllCluster.get(newcluster).add_Point(Points.get(i));
 		}
+		for(int i=0;i<Num_Cluster;i++)
+		{
+			AllCluster.get(i).setNum_DataPoints(AllCluster.get(i).DataInCluster().size());
+		}
 	}
 	
 	private double Distance(DataPoint p1, DataPoint p2)
