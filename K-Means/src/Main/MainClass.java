@@ -4,14 +4,20 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import javax.swing.JFrame;
+
 import Generator.*;
+import Graphics.*;
+
+import org.math.plot.*;
 
 public class MainClass {
 
 	public static void main(String[] args) throws IOException
 	{
 
-		InputStreamReader isr = new InputStreamReader(System.in);
+/*		InputStreamReader isr = new InputStreamReader(System.in);
 	    BufferedReader br = new BufferedReader(isr);
 	    System.out.print("Number of Cluster: ");
 	    String eingabe = br.readLine();
@@ -59,7 +65,22 @@ public class MainClass {
 				writer.write(Double.toString(tempdoubleb)+", ");
 			}
 			writer.write("\n");
-		}
+		}*/
+		
+		double[] x = {1,2};
+		double[] y = {3,4};
+
+		// create your PlotPanel (you can use it as a JPanel)
+		Plot2DPanel plot = new Plot2DPanel();
+
+		// add a line plot to the PlotPanel
+		plot.addScatterPlot("jo", x, y);
+
+		// put the PlotPanel in a JFrame, as a JPanel
+		JFrame frame = new JFrame("a plot panel");
+		frame.setSize(600, 600);
+		frame.setContentPane(plot);
+		frame.setVisible(true);
 	}
 	
 }
