@@ -12,6 +12,12 @@ public class DataPoint {
 		Data = new double[dim];
 		Init(dev,var, dim);
 	}
+	
+	public DataPoint(double[] _Data)
+	{
+		Data = _Data;
+	}
+	
 	private void Init(double[] dev, double[] variation,  int Dim)
 	{
 		Random r = new Random();
