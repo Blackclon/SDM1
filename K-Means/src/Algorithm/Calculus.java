@@ -1,5 +1,6 @@
 package Algorithm;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -108,7 +109,7 @@ public class Calculus {
 		double temp = 0;
 		for(int i=0;i<Dimension;i++)
 		{
-			temp+=Math.pow((p1.getData()[i]-p2.getData()[i]),2.0);
+			temp+=Math.pow(((p1.getData())[i]-(p2.getData())[i]),2.0);
 		}
 		temp = Math.pow(temp, 1.0/2.0);
 		return temp;
@@ -117,7 +118,11 @@ public class Calculus {
 	public List<Cluster> getAllCluster()
 	{
 		Initial1();
-		Update_Points1();
+		for(int i = 0; i<10;i++)
+		{
+			Update_Points1();
+			Calc_Centroid();
+		}
 		return AllCluster;
 	}
 }
