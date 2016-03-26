@@ -64,6 +64,7 @@ public class MainClass {
 		    int B = Integer.parseInt(eingabe8);
 		    
 		    Graphics Z = new Graphics(Calc.getAllCluster(), A, B);
+		   // System.out.println(Calc.getAllCluster().size());
 		}
 		/*
 		List<DataPoint> test = DataGenerator.getInstance().getDataPoints();
