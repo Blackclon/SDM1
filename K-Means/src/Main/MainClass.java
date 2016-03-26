@@ -8,7 +8,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import Generator.*;
-import Graphics.*;
+//import Graphics.*;
 
 import org.math.plot.*;
 
