@@ -1,6 +1,7 @@
 package Main;
 
 import java.io.*;
+import Graphics.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +13,13 @@ import Generator.*;
 
 import org.math.plot.*;
 
+
 public class MainClass {
 
 	public static void main(String[] args) throws IOException
 	{
 
-/*		InputStreamReader isr = new InputStreamReader(System.in);
+		InputStreamReader isr = new InputStreamReader(System.in);
 	    BufferedReader br = new BufferedReader(isr);
 	    System.out.print("Number of Cluster: ");
 	    String eingabe = br.readLine();
@@ -31,24 +33,41 @@ public class MainClass {
 	    String eingabe3 = br.readLine();
 	    
 	    
-	    System.out.print("Enter Dtata Dimension: ");
+	    System.out.print("Enter Data Dimension: ");
 	    String eingabe4 = br.readLine();
 	    
+	    System.out.print("Enter Dimension to plot as X-Coordinate: ");
+	    String eingabe5 = br.readLine();
+	    System.out.print("Enter Dimension to plot as Y-Coordinate: ");
+	    String eingabe6 = br.readLine();
 	    
 	    
 	    int numCluster = Integer.parseInt(eingabe);
 	    int numData = Integer.parseInt(eingabe2);
 	    int Xmax = Integer.parseInt(eingabe3);
 	    int dim = Integer.parseInt(eingabe4);
+	    int x = Integer.parseInt(eingabe5);
+	    int y = Integer.parseInt(eingabe6);
 	    
-	    if(numCluster > numData/2 || Xmax < 100)
+	    if(numCluster > numData/2 || Xmax < 100 || x == y)
 	    {
 	    	System.out.print("Wrong input data, please restart programm!");
 	    	System.exit(0);
 	    }
 	    
 		DataGenerator.getInstance().Init(numCluster, numData, Xmax, dim);
-		
+		Graphics G = new Graphics(DataGenerator.getInstance().getDataPoints(), x, y);
+		while(true)
+		{
+			System.out.print("Enter Dimension to plot as X-Coordinate: ");
+		    String eingabe7 = br.readLine();
+		    System.out.print("Enter Dimension to plot as Y-Coordinate: ");
+		    String eingabe8 = br.readLine();
+		    int A = Integer.parseInt(eingabe7);
+		    int B = Integer.parseInt(eingabe8);
+		    Graphics Z = new Graphics(DataGenerator.getInstance().getDataPoints(), A, B);
+		}
+		/*
 		List<DataPoint> test = DataGenerator.getInstance().getDataPoints();
         File logFile = new File("test.txt");
         // This will output the full path where the file will be written to...
@@ -66,21 +85,27 @@ public class MainClass {
 			}
 			writer.write("\n");
 		}*/
-		
-		double[] x = {1,2};
-		double[] y = {3,4};
+		/*
+		double[] x = {1};
+		double[] y = {3};
 
 		// create your PlotPanel (you can use it as a JPanel)
 		Plot2DPanel plot = new Plot2DPanel();
 
 		// add a line plot to the PlotPanel
-		plot.addScatterPlot("jo", x, y);
+		plot.addScatterPlot("jo", y);
+		
 
 		// put the PlotPanel in a JFrame, as a JPanel
 		JFrame frame = new JFrame("a plot panel");
 		frame.setSize(600, 600);
 		frame.setContentPane(plot);
 		frame.setVisible(true);
+		*/
+		
+		
+		
+		
 	}
 	
 }
