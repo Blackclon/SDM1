@@ -67,7 +67,7 @@ public class MainClass {
 		    int B = Integer.parseInt(eingabe8);
 		    
 		    Graphics Z = new Graphics(temp, A, B);
-		    Calc.TEST();
+		    //Calc.TEST();
 		   // System.out.println(Calc.getAllCluster().size());
 		}
 		/*

@@ -13,6 +13,8 @@ public class Calculus {
 	private int Dimension;
 	private List<Cluster> AllCluster = new ArrayList<Cluster>();
 	private List<DataPoint> Points = new ArrayList<DataPoint>();
+	private List<DataPoint> LastCentroids = new ArrayList<DataPoint>();
+	private int Runs = 0;
 
 	public Calculus(List<DataPoint> _Points, int _Num_Cluster)
 	{
@@ -21,6 +23,7 @@ public class Calculus {
 		Num_Cluster = _Num_Cluster;
 		for(int i = 0;i<Num_Cluster; i++)
 		{
+			LastCentroids.add(new DataPoint(Dimension));
 			AllCluster.add(new Cluster(0)); // Amount of Points unknown
 		}
 	}
@@ -79,6 +82,10 @@ public class Calculus {
 			{
 				centroid[k]=centroid[k]/temp_Cluster.getNum_DataPoints();
 				
+			}
+			if(AllCluster.get(i).get_Centroid() != null)
+			{
+				LastCentroids.get(i).setData(AllCluster.get(i).get_Centroid().getData());
 			}
 			AllCluster.get(i).set_Centroid(new DataPoint(centroid));
 		}
@@ -145,15 +152,62 @@ public class Calculus {
 		return temp;
 	}
 	
+	private boolean ClusterChangeCheck()
+	{
+		int count = 0;
+		int adder = 0;
+		if(LastCentroids.isEmpty())
+		{
+			return true;
+		}
+		if(AllCluster.get(0).get_Centroid() == null)
+		{
+			return true;
+		}
+		for(int i = 0; i < AllCluster.size(); i++)
+		{
+			
+			
+			for(int j=0;j<Dimension;j++)
+			{
+				
+				if(((int)(LastCentroids.get(i).getData()[j] * 10000))/10000.0 
+						== ((int)(AllCluster.get(i).get_Centroid().getData()[j] * 10000))/10000.0)
+				{
+					adder++;
+				}
+				//System.out.println(((int)(LastCentroids.get(i).getData()[0] * 10000))/10000.0);
+				//System.out.println(((int)(AllCluster.get(i).get_Centroid().getData()[0] * 10000))/10000.0);
+				//System.out.println(((int)(LastCentroids.get(i).getData()[1] * 10000))/10000.);
+				//System.out.println(((int)(AllCluster.get(i).get_Centroid().getData()[1] * 10000))/10000.0);
+			}
+			if(adder == Dimension)
+			{
+				count++;
+				//System.out.println(count);
+			}
+			adder = 0;
+		}
+		if(count == AllCluster.size())
+		{
+			return false;
+		}
+		return true;
+		
+	}
+	
 	public List<Cluster> getAllCluster()
 	{
 		Initial2();
 		//Calc_Centroid();
-		for(int i = 0; i<20;i++)
+		while(ClusterChangeCheck() == true)
 		{
 			Update_Points1();
 			Calc_Centroid();
+			Runs++;
+			
 		}
+		System.out.println(Runs);
 		return AllCluster;
 	}
 	

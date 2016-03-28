@@ -18,6 +18,15 @@ public class DataPoint {
 		Data = _Data;
 	}
 	
+	public DataPoint(int dim)
+	{
+		Data = new double[dim];
+		for(int i = 0; i < dim; i++)
+		{
+			Data[i] = 0.0;
+		}
+	}
+	
 	private void Init(double[] dev, double[] variation,  int Dim)
 	{
 		Random r = new Random();
@@ -32,5 +41,8 @@ public class DataPoint {
 	
 	public double[] getData() {
 		return Data;
+	}
+	public void setData(double[] toSet){
+		Data = toSet;
 	}
 }

@@ -13,6 +13,8 @@ public class Graphics {
 	
 	private double[] x;
 	private double[] y;
+	double[] tempX = new double[1];
+	double[] tempY = new double[1];
 	//private Color[] color;
 	
 	public Graphics(List<Cluster> Input, int X, int Y)
@@ -26,13 +28,18 @@ public class Graphics {
 		Color color[] = {Color.BLUE, Color.CYAN, Color.PINK, 
 				Color.RED, Color.BLACK, Color.LIGHT_GRAY, Color.MAGENTA, 
 				Color.ORANGE, Color.DARK_GRAY,Color.GRAY};
-		double[] tempX = new double[1];
-		double[] tempY = new double[1];
+		
 		// add a line plot to the PlotPanel
 		for(int j = 0; j < Input.size(); j++)
 		{
+			x = null;
+			y = null;
 			x = new double[DataGenerator.getInstance().getNum_DataPoints()];
 			y = new double[DataGenerator.getInstance().getNum_DataPoints()];
+			tempX = null;
+			tempY = null;
+			tempX = new double[1];
+			tempY = new double[1];
 			for(int i = 0; i < Input.get(j).getNum_DataPoints(); i++)
 			{
 				
@@ -41,8 +48,8 @@ public class Graphics {
 			}
 			tempX[0] = Input.get(j).get_Centroid().getData()[X-1];
 			tempY[0] = Input.get(j).get_Centroid().getData()[Y-1];
-			plot.addScatterPlot("ja",color [j%10], x, y);
-			plot.addScatterPlot("jo", Color.GREEN,tempX, tempY );
+			plot.addScatterPlot("DATA",color [j%10], x, y);
+			plot.addScatterPlot("Means", Color.GREEN,tempX, tempY );
 			
 		}
 		
