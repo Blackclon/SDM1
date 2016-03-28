@@ -10,7 +10,7 @@ public class DataPoint {
 	public DataPoint(double[] dev,double[] var, int dim)
 	{
 		Data = new double[dim];
-		Init(dev,var, dim);
+		Init(dev, var, dim);
 	}
 	
 	public DataPoint(double[] _Data)

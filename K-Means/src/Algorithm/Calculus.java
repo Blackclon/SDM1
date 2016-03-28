@@ -120,6 +120,7 @@ public class Calculus {
 				}
 			}
 			AllCluster.get(newcluster).add_Point(Points.get(i));
+
 		}
 
 		for(int i=0;i<Num_Cluster;i++)
@@ -131,14 +132,16 @@ public class Calculus {
 	private double Distance(DataPoint p1, DataPoint p2)
 	{
 		double temp = 0;
+		double temp0 = 0;
+		double temp1 = 0;
 		for(int i=0;i<Dimension;i++)
 		{
-			double temp0 = p1.getData()[i];
-			double temp1 = p2.getData()[i];
+			temp0 = p1.getData()[i];
+			temp1 = p2.getData()[i];
 			temp+=Math.pow((temp0 - temp1),2.0);
 		}
 		//temp = Math.pow(temp, 1.0/2.0);
-		if(temp == Double.NaN){System.out.println("NAN!!!!!!!!!!!!!!!!!!!!!");}
+		//if(temp == Double.NaN){System.out.println("NAN!!!!!!!!!!!!!!!!!!!!!");}
 		return temp;
 	}
 	
