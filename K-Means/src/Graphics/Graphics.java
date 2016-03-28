@@ -27,7 +27,8 @@ public class Graphics {
 		Color color[] = {Color.BLUE, Color.CYAN, Color.DARK_GRAY, 
 				Color.RED, Color.BLACK, Color.LIGHT_GRAY, Color.MAGENTA, 
 				Color.ORANGE, Color.PINK,Color.GRAY};
-		
+		double[] tempX = new double[1];
+		double[] tempY = new double[1];
 		// add a line plot to the PlotPanel
 		for(int j = 0; j < DataGenerator.getInstance().getNum_Cluster(); j++)
 		{
@@ -36,8 +37,6 @@ public class Graphics {
 				x[i] = Input.get(j).DataInCluster().get(i).getData()[X-1];
 				y[i] = Input.get(j).DataInCluster().get(i).getData()[Y-1];
 			}
-			double[] tempX = new double[1];
-			double[] tempY = new double[1];
 			tempX[0] = Input.get(j).get_Centroid().getData()[X-1];
 			tempY[0] = Input.get(j).get_Centroid().getData()[Y-1];
 			plot.addScatterPlot("jo",color [j%10], x, y);

@@ -39,9 +39,21 @@ public class Calculus {
 		{
 			tempCluster = AllCluster.get(i);
 			tempCluster.setNum_DataPoints(tempCluster.DataInCluster().size());
+			AllCluster.set(i, tempCluster);
 		}
 		
 		Calc_Centroid();
+	}
+	
+	private void Initial2()
+	{
+		Random RandomGenerator = new Random();
+		for(int i = 0; i < Num_Cluster; i++)
+		{
+			int rand = RandomGenerator.nextInt(Points.size());
+			AllCluster.get(i).set_Centroid(Points.get(rand));
+		}
+		
 	}
 	
 	private void Calc_Centroid()  // Calculates Centroids and stores them in Cluster
@@ -51,6 +63,10 @@ public class Calculus {
 			Cluster temp_Cluster = AllCluster.get(i);
 			double[] centroid = new double[Dimension];
 			List<DataPoint> temp_Points = temp_Cluster.DataInCluster();
+			/*if(temp_Cluster.getNum_DataPoints() == 0)
+			{
+				continue;
+			}*/
 			for(int j =0;j<temp_Cluster.getNum_DataPoints();j++)
 			{
 				double[] temp_d_array = temp_Points.get(j).getData();
@@ -62,6 +78,7 @@ public class Calculus {
 			for(int k = 0;k<centroid.length;k++)
 			{
 				centroid[k]=centroid[k]/temp_Cluster.getNum_DataPoints();
+				
 			}
 			AllCluster.get(i).set_Centroid(new DataPoint(centroid));
 		}
@@ -82,14 +99,20 @@ public class Calculus {
 		for(int i = 0;i<Num_Cluster; i++)
 		{
 			AllCluster.add(new Cluster(0)); // Amount of Points unknown
+			
+		}
+		for(int i = 0;i<Num_Cluster; i++)
+		{
 			AllCluster.get(i).set_Centroid(Centroids.get(i));
 		}
 		for(int i=0;i<Points.size();i++)
 		{
+			newcluster = 0;
 			temp_dist = Distance(Points.get(i),Centroids.get(0));
 			for(int j = 1;j<Num_Cluster;j++)
 			{
 				tempd = Distance(Points.get(i),Centroids.get(j));
+				//System.out.println(Distance(Points.get(i),Centroids.get(j)));
 				if(tempd<temp_dist)
 				{
 					temp_dist=tempd;
@@ -98,6 +121,7 @@ public class Calculus {
 			}
 			AllCluster.get(newcluster).add_Point(Points.get(i));
 		}
+
 		for(int i=0;i<Num_Cluster;i++)
 		{
 			AllCluster.get(i).setNum_DataPoints(AllCluster.get(i).DataInCluster().size());
@@ -109,20 +133,40 @@ public class Calculus {
 		double temp = 0;
 		for(int i=0;i<Dimension;i++)
 		{
-			temp+=Math.pow(((p1.getData())[i]-(p2.getData())[i]),2.0);
+			double temp0 = p1.getData()[i];
+			double temp1 = p2.getData()[i];
+			temp+=Math.pow((temp0 - temp1),2.0);
 		}
-		temp = Math.pow(temp, 1.0/2.0);
+		//temp = Math.pow(temp, 1.0/2.0);
+		if(temp == Double.NaN){System.out.println("NAN!!!!!!!!!!!!!!!!!!!!!");}
 		return temp;
 	}
 	
 	public List<Cluster> getAllCluster()
 	{
-		Initial1();
-		for(int i = 0; i<10;i++)
+		Initial2();
+		//Calc_Centroid();
+		for(int i = 0; i<20;i++)
 		{
 			Update_Points1();
 			Calc_Centroid();
 		}
 		return AllCluster;
 	}
+	
+	public void TEST()
+	{
+		for(int i = 0; i < AllCluster.size(); i++)
+		{
+			System.out.println(AllCluster.get(i).getNum_DataPoints());
+		}
+	}
 }
+
+
+
+
+
+
+
+

@@ -49,6 +49,7 @@ public class DataGenerator {
 			AllCluster.add(new Cluster(average_Num_Points-random));
 			AllCluster.add(new Cluster(average_Num_Points+random));
 			count = count + (average_Num_Points-random) + (average_Num_Points+random);
+			
 		}
 		if((Num_Cluster%2)==1)		//if Num_Clusters is odd
 		{
@@ -67,10 +68,9 @@ public class DataGenerator {
 	
 	private void CreateData(int dim)
 	{
-		int count = 0;
 		boolean chaos = false;
 		Random RandomGenerator = new Random();
-		double factor = x_max/(Num_Cluster *2);
+		double factor = x_max/(Num_Cluster *3);
 		for(int i = 0; i < Num_Cluster; i++)
 		{
 			//Meanvalues
@@ -99,19 +99,18 @@ public class DataGenerator {
 			for(int j = 0; j < AllCluster.get(i).getNum_DataPoints(); j++)
 			{
 				AllCluster.get(i).add_Point(new DataPoint(random,variation, dim));
-				count++;
-
 			}
 		}
 		//System.out.println(count);
 	}
 
 	private void FillDataPoints() {
-		for(int i = 0;i<AllCluster.size();i++)
+		for(int i = 0;i<Num_Cluster;i++)
 		{
 			for(int j=0; j<AllCluster.get(i).getNum_DataPoints();j++)
 			{
 				DataPoints.add(AllCluster.get(i).DataInCluster().get(j));
+				
 
 			}
 		}

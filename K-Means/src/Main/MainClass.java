@@ -20,6 +20,7 @@ public class MainClass {
 	public static void main(String[] args) throws IOException
 	{
 
+		List<Cluster> temp = new ArrayList<Cluster>();
 		InputStreamReader isr = new InputStreamReader(System.in);
 	    BufferedReader br = new BufferedReader(isr);
 	    System.out.print("Number of Cluster: ");
@@ -51,8 +52,10 @@ public class MainClass {
 	    
 		DataGenerator.getInstance().Init(numCluster, numData, Xmax, dim);
 
+		//System.out.print("TEST");
 		Calculus Calc = new Calculus(DataGenerator.getInstance().getDataPoints(),numCluster);
 		
+		temp = Calc.getAllCluster();
 		//not necessary!! but cool :D
 		while(true)
 		{
@@ -63,7 +66,8 @@ public class MainClass {
 		    int A = Integer.parseInt(eingabe7);
 		    int B = Integer.parseInt(eingabe8);
 		    
-		    Graphics Z = new Graphics(Calc.getAllCluster(), A, B);
+		    Graphics Z = new Graphics(temp, A, B);
+		    Calc.TEST();
 		   // System.out.println(Calc.getAllCluster().size());
 		}
 		/*
