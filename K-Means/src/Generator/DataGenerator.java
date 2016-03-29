@@ -80,7 +80,7 @@ public class DataGenerator {
 			for(int k = 0; k < dim; k++)
 			{
 				random[k] = RandomGenerator.nextInt(x_max);
-				variation[k] = RandomGenerator.nextInt((int)factor);
+				variation[k] = RandomGenerator.nextInt((int)factor) + 1;
 			}
 			for(int l = 0; l < dim; l++)
 			{
