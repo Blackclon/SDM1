@@ -16,12 +16,14 @@ public class Calculus {
 	private List<DataPoint> Points = new ArrayList<DataPoint>();
 	private List<DataPoint> LastCentroids = new ArrayList<DataPoint>();
 	private int Runs = 0;
+	private int xmax;
 
-	public Calculus(List<DataPoint> _Points, int _Num_Cluster)
+	public Calculus(List<DataPoint> _Points, int _Num_Cluster, int _xmax)
 	{
 		Points = _Points;
 		Dimension = _Points.get(0).getData().length;
 		Num_Cluster = _Num_Cluster;
+		xmax = _xmax;
 		for(int i = 0;i<Num_Cluster; i++)
 		{
 			LastCentroids.add(new DataPoint(Dimension));
@@ -29,7 +31,7 @@ public class Calculus {
 		}
 	}
 	
-	private void Initial1() // Random distribution of Points to Clusters and Calc of initial Centroids
+	private void Initial3() // Random distribution of Points to Clusters and Calc of initial Centroids
 	{
 		Random RandomGenerator = new Random();
 		int index = 0;
@@ -47,6 +49,18 @@ public class Calculus {
 		}
 		
 		Calc_Centroid();
+	}
+	
+	private void Initial1()
+	{
+		Random RandomGenerator = new Random();
+		for(int i=0;i<Num_Cluster;i++)
+		{
+			int rand_x = RandomGenerator.nextInt(xmax);
+			int rand_y = 	RandomGenerator.nextInt(xmax);
+			double[] temp_array = {(double) rand_x,(double) rand_y};
+			AllCluster.get(i).set_Centroid(new DataPoint(temp_array));
+		}
 	}
 	
 	private void Initial2()
@@ -203,8 +217,6 @@ public class Calculus {
 		}
 		for(int i = 0; i < AllCluster.size(); i++)
 		{
-			
-			
 			for(int j=0;j<Dimension;j++)
 			{
 				if(((int)(LastCentroids.get(i).getData()[j] * 1000000))/1000000.0 
@@ -238,8 +250,7 @@ public class Calculus {
 	
 	public List<Cluster> getAllCluster() throws IOException
 	{
-		Initial2();
-
+		Initial1();
 		//HelpFunctions.txtOutput(AllCluster, "Initial2");
 		while(ClusterChangeCheck() == true)
 		{
@@ -248,8 +259,6 @@ public class Calculus {
 			//HelpFunctions.txtOutput(AllCluster, "Update");
 			Runs++;
 			//System.out.println("Here????????????????????");
-			
-			System.out.println("TEST.");
 		}
 		System.out.println(Runs + "steps till covergence.");
 		return AllCluster;

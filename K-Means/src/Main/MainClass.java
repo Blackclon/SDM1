@@ -54,7 +54,7 @@ public class MainClass {
 	    
 		DataGenerator.getInstance().Init(numCluster, numData, Xmax, dim);
 		//System.out.print("TEST");
-		Calculus Calc = new Calculus(DataGenerator.getInstance().getDataPoints(),numCluster);
+		Calculus Calc = new Calculus(DataGenerator.getInstance().getDataPoints(),numCluster, Xmax);
 		//HelpFunctions.txtOutput(DataGenerator.getInstance().getAllCluster(),"Initial");		
 		temp = Calc.getAllCluster();
 		//not necessary!! but cool :D
