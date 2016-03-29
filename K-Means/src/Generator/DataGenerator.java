@@ -70,7 +70,7 @@ public class DataGenerator {
 	{
 		boolean chaos = false;
 		Random RandomGenerator = new Random();
-		double factor = x_max/(Num_Cluster *3.0);
+		double factor = x_max/(Num_Cluster);
 		for(int i = 0; i < Num_Cluster; i++)
 		{
 			//Meanvalues

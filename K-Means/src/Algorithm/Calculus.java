@@ -84,10 +84,6 @@ public class Calculus {
 				centroid[k]=centroid[k]/temp_Cluster.getNum_DataPoints();
 				
 			}
-			if(AllCluster.get(i).get_Centroid() != null)
-			{
-				LastCentroids.get(i).setData(AllCluster.get(i).get_Centroid().getData());
-			}
 			AllCluster.get(i).set_Centroid(new DataPoint(centroid));
 		}
 	}
@@ -134,6 +130,7 @@ public class Calculus {
 		{
 			AllCluster.get(i).setNum_DataPoints(AllCluster.get(i).DataInCluster().size());
 		}
+		Calc_Centroid();
 	}
 	private void Update_Points2()
 	{
@@ -189,7 +186,6 @@ public class Calculus {
 			temp+=Math.pow((temp0 - temp1),2.0);
 		}
 		//temp = Math.pow(temp, 1.0/2.0);
-		//if(temp == Double.NaN){System.out.println("NAN!!!!!!!!!!!!!!!!!!!!!");}
 		return temp;
 	}
 	
@@ -211,10 +207,6 @@ public class Calculus {
 			
 			for(int j=0;j<Dimension;j++)
 			{
-				//System.out.println(((int)(LastCentroids.get(i).getData()[0] * 10000))/10000.0 );
-				//System.out.println(((int)(AllCluster.get(i).get_Centroid().getData()[0] * 10000))/10000.0 );
-				//System.out.println(((int)(LastCentroids.get(i).getData()[1] * 10000))/10000.0 );
-				//System.out.println(((int)(AllCluster.get(i).get_Centroid().getData()[1] * 10000))/10000.0 );
 				if(((int)(LastCentroids.get(i).getData()[j] * 1000000))/1000000.0 
 						== ((int)(AllCluster.get(i).get_Centroid().getData()[j] * 1000000))/1000000.0)
 				{
@@ -236,6 +228,14 @@ public class Calculus {
 		
 	}
 	
+	private void UpdateCentroids()
+	{
+		for(int i = 0; i < Num_Cluster; i++)
+		{
+			LastCentroids.get(i).setData(AllCluster.get(i).get_Centroid().getData());
+		}
+	}
+	
 	public List<Cluster> getAllCluster() throws IOException
 	{
 		Initial2();
@@ -243,13 +243,13 @@ public class Calculus {
 		//HelpFunctions.txtOutput(AllCluster, "Initial2");
 		while(ClusterChangeCheck() == true)
 		{
+			UpdateCentroids();
 			Update_Points1();
 			//HelpFunctions.txtOutput(AllCluster, "Update");
-			Calc_Centroid();
 			Runs++;
 			//System.out.println("Here????????????????????");
 			
-
+			System.out.println("TEST.");
 		}
 		System.out.println(Runs + "steps till covergence.");
 		return AllCluster;
