@@ -1,7 +1,9 @@
 package Main;
 
 import java.io.*;
+
 import Graphics.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,10 +53,9 @@ public class MainClass {
 	    }
 	    
 		DataGenerator.getInstance().Init(numCluster, numData, Xmax, dim);
-
 		//System.out.print("TEST");
 		Calculus Calc = new Calculus(DataGenerator.getInstance().getDataPoints(),numCluster);
-		
+		//HelpFunctions.txtOutput(DataGenerator.getInstance().getAllCluster(),"Initial");		
 		temp = Calc.getAllCluster();
 		//not necessary!! but cool :D
 		while(true)

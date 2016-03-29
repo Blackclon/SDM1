@@ -7,6 +7,7 @@ import java.util.Random;
 
 import Generator.Cluster;
 import Generator.DataPoint;
+import Graphics.HelpFunctions;
 
 public class Calculus {
 	private int Num_Cluster;
@@ -238,16 +239,17 @@ public class Calculus {
 		
 	}
 	
-	public List<Cluster> getAllCluster()
+	public List<Cluster> getAllCluster() throws IOException
 	{
-		Initial1();
-		//Calc_Centroid();
+		Initial2();
+		//HelpFunctions.txtOutput(AllCluster, "Initial2");
 		while(ClusterChangeCheck() == true)
 		{
-			Update_Points2();
-			//Calc_Centroid();
+			Update_Points1();
+			//HelpFunctions.txtOutput(AllCluster, "Update");
+			Calc_Centroid();
 			Runs++;
-			System.out.println("Here????????????????????");
+			//System.out.println("Here????????????????????");
 			
 		}
 		System.out.println(Runs + "steps till covergence.");
