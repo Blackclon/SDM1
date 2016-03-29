@@ -66,10 +66,11 @@ public class Calculus {
 			Cluster temp_Cluster = AllCluster.get(i);
 			double[] centroid = new double[Dimension];
 			List<DataPoint> temp_Points = temp_Cluster.DataInCluster();
-			/*if(temp_Cluster.getNum_DataPoints() == 0)
+			if(temp_Cluster.getNum_DataPoints() == 0)
 			{
+				System.out.println("Here?");
 				continue;
-			}*/
+			}
 			for(int j =0;j<temp_Cluster.getNum_DataPoints();j++)
 			{
 				double[] temp_d_array = temp_Points.get(j).getData();
@@ -127,12 +128,53 @@ public class Calculus {
 				}
 			}
 			AllCluster.get(newcluster).add_Point(Points.get(i));
-
 		}
 
 		for(int i=0;i<Num_Cluster;i++)
 		{
 			AllCluster.get(i).setNum_DataPoints(AllCluster.get(i).DataInCluster().size());
+		}
+	}
+	private void Update_Points2()
+	{
+		double temp_dist = 0;
+		double tempd = 0;
+		int destcluster = 0;
+		List<DataPoint> Centroids = new ArrayList<DataPoint>();
+		for(int i=0;i<Num_Cluster;i++)
+		{
+			Centroids.add(AllCluster.get(i).get_Centroid());
+		}
+		AllCluster.clear();
+		for(int i = 0;i<Num_Cluster; i++)
+		{
+			AllCluster.add(new Cluster(0)); // Amount of Points unknown
+			
+		}
+		for(int i = 0;i<Num_Cluster; i++)
+		{
+			AllCluster.get(i).set_Centroid(Centroids.get(i));
+		}
+		for(int i=0;i<Points.size();i++)
+		{
+			destcluster = 0;
+			temp_dist = Distance(Points.get(i),Centroids.get(0));
+			for(int j = 1;j<Num_Cluster;j++)
+			{
+				tempd = Distance(Points.get(i),Centroids.get(j));
+				//System.out.println(Distance(Points.get(i),Centroids.get(j)));
+				if(tempd<temp_dist)
+				{
+					temp_dist=tempd;
+					destcluster=j;
+				}
+			}
+			AllCluster.get(destcluster).add_Point(Points.get(i));
+			for(int k=0;k<Num_Cluster;k++)
+			{
+				AllCluster.get(k).setNum_DataPoints(AllCluster.get(k).DataInCluster().size());
+			}
+			Calc_Centroid();
 		}
 	}
 	
@@ -198,16 +240,17 @@ public class Calculus {
 	
 	public List<Cluster> getAllCluster()
 	{
-		Initial2();
+		Initial1();
 		//Calc_Centroid();
 		while(ClusterChangeCheck() == true)
 		{
-			Update_Points1();
-			Calc_Centroid();
+			Update_Points2();
+			//Calc_Centroid();
 			Runs++;
+			System.out.println("Here????????????????????");
 			
 		}
-		System.out.println(Runs);
+		System.out.println(Runs + "steps till covergence.");
 		return AllCluster;
 	}
 	
