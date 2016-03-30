@@ -218,12 +218,7 @@ public class Calculus {
 		{
 			for(int j=0;j<Dimension;j++)
 			{
-				/*if(((int)(LastCentroids.get(i).getData()[j] * 10000000))/10000000.0 
-						== ((int)(AllCluster.get(i).get_Centroid().getData()[j] * 10000000))/10000000.0)
-				{
-					adder++;
-				}*/
-				if(Math.abs((LastCentroids.get(i).getData()[j] - AllCluster.get(i).get_Centroid().getData()[j])) < 0.00001)
+				if(Math.abs((LastCentroids.get(i).getData()[j] - AllCluster.get(i).get_Centroid().getData()[j])) < 0.00000001)
 				{
 					adder++;
 				}

@@ -32,10 +32,8 @@ public class MainClass {
 	    System.out.print("Number of Cluster: ");
 	    String eingabe = br.readLine();
 	    
-	    
 	    System.out.print("Number of Data Points: ");
 	    String eingabe2 = br.readLine();
-	    
 	    
 	    System.out.print("Enter X max: ");
 	    String eingabe3 = br.readLine();
@@ -55,8 +53,6 @@ public class MainClass {
 	    	System.out.print("Wrong input data, please restart programm!");
 	    	System.exit(0);
 	    }
-	    
-	   
 
 		DataGenerator.getInstance().Init(numCluster, numData, Xmax, dim);
 
