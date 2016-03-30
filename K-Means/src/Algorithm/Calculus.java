@@ -130,7 +130,6 @@ public class Calculus {
 			for(int j = 1;j<Num_Cluster;j++)
 			{
 				tempd = Distance(Points.get(i),Centroids.get(j));
-				//System.out.println(Distance(Points.get(i),Centroids.get(j)));
 				if(tempd<temp_dist)
 				{
 					temp_dist=tempd;
@@ -199,7 +198,7 @@ public class Calculus {
 			temp1 = p2.getData()[i];
 			temp+=Math.pow((temp0 - temp1),2.0);
 		}
-		//temp = Math.pow(temp, 1.0/2.0);
+		temp = Math.sqrt(temp);
 		return temp;
 	}
 	
@@ -219,8 +218,12 @@ public class Calculus {
 		{
 			for(int j=0;j<Dimension;j++)
 			{
-				if(((int)(LastCentroids.get(i).getData()[j] * 1000000))/1000000.0 
-						== ((int)(AllCluster.get(i).get_Centroid().getData()[j] * 1000000))/1000000.0)
+				/*if(((int)(LastCentroids.get(i).getData()[j] * 10000000))/10000000.0 
+						== ((int)(AllCluster.get(i).get_Centroid().getData()[j] * 10000000))/10000000.0)
+				{
+					adder++;
+				}*/
+				if(Math.abs((LastCentroids.get(i).getData()[j] - AllCluster.get(i).get_Centroid().getData()[j])) < 0.00001)
 				{
 					adder++;
 				}
@@ -228,7 +231,6 @@ public class Calculus {
 			if(adder == Dimension)
 			{
 				count++;
-				//System.out.println(count);
 			}
 			adder = 0;
 		}
@@ -248,30 +250,68 @@ public class Calculus {
 		}
 	}
 	
-	public List<Cluster> getAllCluster() throws IOException
-	{
-		Initial1();
-		//HelpFunctions.txtOutput(AllCluster, "Initial2");
-		while(ClusterChangeCheck() == true)
-		{
-			UpdateCentroids();
-			Update_Points1();
-			//HelpFunctions.txtOutput(AllCluster, "Update");
-			Runs++;
-			//System.out.println("Here????????????????????");
-		}
-		System.out.println(Runs + "steps till covergence.");
+	public List<Cluster> getAllCluster(){
 		return AllCluster;
 	}
 	
-	public void TEST()
+	public List<Double> ChoseAlgorythm(int I, int U)
 	{
-		for(int i = 0; i < AllCluster.size(); i++)
+		List<Double> temp = new ArrayList<Double>();
+		if(I == 1)
 		{
-			System.out.println(AllCluster.get(i).getNum_DataPoints());
+			Initial1();
+			System.out.println("Initial 1: ");
 		}
+		else
+		{
+			Initial2();
+			System.out.println("Initial 2: ");
+		}
+		if(U == 1)
+		{
+			while(ClusterChangeCheck() == true)
+			{
+				UpdateCentroids();
+				Update_Points1();
+				Runs++;
+				temp.add(ObjectiveFunction());
+				
+				
+			}
+			System.out.println(Runs + "steps till covergence.");
+		}
+		else
+		{
+			while(ClusterChangeCheck() == true)
+			{
+				UpdateCentroids();
+				Update_Points2();
+				Runs++;
+				temp.add(ObjectiveFunction());
+				
+			}
+			System.out.println(Runs + "steps till covergence.");
+		}
+		
+		Runs = 0;
+		return temp;
+	}
+	
+	
+	private double ObjectiveFunction()
+	{
+		double temp = 0;
+		for(int i = 0; i < Num_Cluster; i++)
+		{
+			for(int j = 0; j < AllCluster.get(i).getNum_DataPoints(); j++)
+			{
+				temp += Math.pow(Distance(AllCluster.get(i).DataInCluster().get(j), AllCluster.get(i).get_Centroid()), 2.0);
+			}
+		}
+		return temp;
 	}
 }
+
 
 
 
