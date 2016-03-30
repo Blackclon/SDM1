@@ -25,8 +25,7 @@ public class Cluster {
 		return DataInCluster;
 	}
 	
-	public void set_Centroid(DataPoint Center)
-	{
+	public void set_Centroid(DataPoint Center){
 		Centroid = Center;
 	}
 	

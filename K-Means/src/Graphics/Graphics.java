@@ -17,18 +17,14 @@ public class Graphics {
 	private double[] tempY = new double[1];
 
 	private Plot2DPanel plot = new Plot2DPanel();
-	//private Color[] color;
 	
 	public Graphics()
 	{
 
 	}
 	
-	public void CreateGraphicWithDataPoints(List<Cluster> Input, int X, int Y)
+	public void CreateGraphicWithDataPoints(List<Cluster> Input, int X, int Y, String S)
 	{
-		//color = new Color[DataGenerator.getInstance().getNum_Cluster()];
-		//CreateColors(DataGenerator.getInstance().getNum_Cluster());
-		// create your PlotPanel (you can use it as a JPanel)
 		Plot2DPanel plotD = new Plot2DPanel();
 		
 		Color color[] = {Color.BLUE, Color.CYAN, Color.PINK, 
@@ -57,16 +53,16 @@ public class Graphics {
 			plotD.addScatterPlot("Means", Color.GREEN,tempX, tempY );
 			plotD.addScatterPlot("Data", color[j%11],x, y );
 			
+			
 		}
-		
 		// put the PlotPanel in a JFrame, as a JPanel
-		JFrame frame = new JFrame("Data Points");
+		JFrame frame = new JFrame(S);
 		frame.setSize(600, 600);
 		frame.setContentPane(plotD);
 		frame.setVisible(true);	
 	}
 	
-	public void CreateGraphicWithArrays(List<Double> values, Color r)
+	public void CreateGraphicWithArrays(List<Double> values, Color r, String S)
 	{
 		double[] length = new double[values.size()];
 		double[] val = new double[values.size()];
@@ -75,7 +71,10 @@ public class Graphics {
 			val[i] = values.get(i);
 			length[i] = i+1;
 		}
-		plot.addLinePlot("Step", r,length, val);
+		plot.addLinePlot(S, r,length, val);
+		plot.setAxisLabel(0, "Iteration steps");
+		plot.setAxisLabel(1, "Objective Function");
+		plot.addLegend("NORTH");
 	}
 	
 	public void ExecuteGraphic()

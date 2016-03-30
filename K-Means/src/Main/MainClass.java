@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import javax.swing.JFrame;
+//import javax.swing.JFrame;
 
 import Generator.*;
 import Algorithm.*;
 //import Graphics.*;
 
-import org.math.plot.*;
+//import org.math.plot.*;
 
 
 public class MainClass {
@@ -59,8 +59,7 @@ public class MainClass {
 		Calculus Calc1 = new Calculus(DataGenerator.getInstance().getDataPoints(),numCluster, Xmax);
 		Calculus Calc2 = new Calculus(DataGenerator.getInstance().getDataPoints(),numCluster, Xmax);
 		Calculus Calc3 = new Calculus(DataGenerator.getInstance().getDataPoints(),numCluster, Xmax);
-		Calculus Calc4 = new Calculus(DataGenerator.getInstance().getDataPoints(),numCluster, Xmax);
-		//HelpFunctions.txtOutput(DataGenerator.getInstance().getAllCluster(),"Initial");		
+		Calculus Calc4 = new Calculus(DataGenerator.getInstance().getDataPoints(),numCluster, Xmax);		
 
 		List<Double> test1 = Calc1.ChoseAlgorythm(1, 1);
 		List<Double> test2 = Calc2.ChoseAlgorythm(1, 2);
@@ -80,18 +79,16 @@ public class MainClass {
 		int B = Integer.parseInt(eingabe8);
 		    
 		Graphics Z = new Graphics();
-		Z.CreateGraphicWithDataPoints(temp1, A, B);
-		Z.CreateGraphicWithDataPoints(temp2, A, B);
-		Z.CreateGraphicWithDataPoints(temp3, A, B);
-		Z.CreateGraphicWithDataPoints(temp4, A, B);
-		Z.CreateGraphicWithArrays(test1, Color.BLUE);
-		Z.CreateGraphicWithArrays(test2, Color.GREEN);
-		Z.CreateGraphicWithArrays(test3, Color.YELLOW);
-		Z.CreateGraphicWithArrays(test4, Color.BLACK);
+		Z.CreateGraphicWithDataPoints(temp1, A, B, "I1-U1");
+		Z.CreateGraphicWithDataPoints(temp2, A, B, "I1-U2");
+		Z.CreateGraphicWithDataPoints(temp3, A, B, "I2-U1");
+		Z.CreateGraphicWithDataPoints(temp4, A, B, "I2-U2");
+		Z.CreateGraphicWithArrays(test1, Color.BLUE, "I1-U1");
+		Z.CreateGraphicWithArrays(test2, Color.GREEN, "I1-U2");
+		Z.CreateGraphicWithArrays(test3, Color.YELLOW, "I2-U1");
+		Z.CreateGraphicWithArrays(test4, Color.BLACK, "I2-U2");
 		
 		Z.ExecuteGraphic();
 		
-		System.out.print("The End.");
-	    String bla = br.readLine();
 	}
 }

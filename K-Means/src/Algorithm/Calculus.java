@@ -1,13 +1,13 @@
 package Algorithm;
 
-import java.io.IOException;
+//import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import Generator.Cluster;
 import Generator.DataPoint;
-import Graphics.HelpFunctions;
+//import Graphics.HelpFunctions;
 
 public class Calculus {
 	private int Num_Cluster;
@@ -218,7 +218,8 @@ public class Calculus {
 		{
 			for(int j=0;j<Dimension;j++)
 			{
-				if(Math.abs((LastCentroids.get(i).getData()[j] - AllCluster.get(i).get_Centroid().getData()[j])) < 0.00000001)
+				if(Math.abs((LastCentroids.get(i).getData()[j] - 
+						AllCluster.get(i).get_Centroid().getData()[j])) < 0.00000001)
 				{
 					adder++;
 				}
